@@ -1,0 +1,38 @@
+services:
+  dbt:
+    image: article1dataops/dbt:latest
+    volumes:
+      - ./dbt_project:/usr/app # Mounts dbt_project directly to /usr/app
+      - ./profiles.yml:/root/.dbt/profiles.yml # Mounts profiles.yml in the default DBT config location
+    environment:
+      DBT_PROJECT_DIR: /usr/app # This points to the correct directory containing dbt_project.yml
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+      - ./data:/data # Mount the local data folder to /data inside the container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_app
+    ports:
+      - "5432:5432"
+
+  superset:
+    image: apache/superset:latest
+    environment:
+      SUPERSET_SECRET_KEY: "my_secret_key"
+      SUPERSET_ADMIN: "admin"
+      SUPERSET_PASSWORD: "admin"
+    ports:
+      - "8088:8088"
+    command: >
+      gunicorn --bind "0.0.0.0:8088" --access-logfile '-' --error-logfile '-' 
+      --workers 1 --worker-class gthread --threads 20 --timeout 60 
+      --limit-request-line 0 --limit-request-field_size 0 "superset.app:create_app()"
+    volumes:
+      - ./superset/:/app/superset_home/

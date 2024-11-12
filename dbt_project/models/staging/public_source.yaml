@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+    - name: public
+      database: my_app
+      schema: public
+      tables:
+        - name: product
+        - name: region
+        - name: reseller
+        - name: sales_staging
+        - name: salesperson_staging
+        - name: salespersonregion
+        - name: targets_staging

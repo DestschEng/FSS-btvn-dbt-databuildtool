@@ -1,0 +1,12 @@
+dbt_project:
+  outputs:
+    dev:
+      dbname: my_app
+      host: db # Use the Docker Compose service name
+      pass: password
+      port: 5432
+      schema: dev
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev
