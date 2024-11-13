@@ -1,6 +1,6 @@
 # FSS - btvn - dbt (Data Build Tool)
 ![Tổng quan hệ thống](/.vscode/FSS%20-%20training%20.pptx.png)
-```[Báo cáo pptx](https://docs.getdbt.com/)```
+[Báo cáo pptx](https://www.canva.com/design/DAGWQUkrL1E/_xN_tOyuYsVBn4cH22lt-Q/edit)
 ## Kiến trúc hệ thống
 Hệ thống sử dụng các thành phần sau:
 - **postgresql**: Cơ sở dữ liệu
